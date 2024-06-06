@@ -27,15 +27,22 @@ export class EditTaskDialogComponent {
 
   constructor(private taskService: TaskService) {
     this.taskForm = new FormGroup({
-      id: new FormControl(this.task?.id ?? ''),
-      title: new FormControl(this.task?.title ?? '', [Validators.required]),
-      description: new FormControl(this.task?.description ?? ''),
-      status: new FormControl(this.task?.status ?? ''),
+      id: new FormControl(''),
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
+      status: new FormControl(''),
     })
   }
 
   openDialog() {
     this.dialog.nativeElement.showModal()
+
+    this.taskForm.patchValue({
+      id: this.task.id,
+      title: this.task.title,
+      description: this.task.description,
+      status: this.task.status,
+    })
   }
 
   closeDialog() {
@@ -44,7 +51,6 @@ export class EditTaskDialogComponent {
   }
 
   onSubmit() {
-    //console.log('UPDATE')
     if (this.taskForm.valid) {
       this.taskService.updateTask(this.taskForm.value).subscribe(() => {})
       window.location.reload()
