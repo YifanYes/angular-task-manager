@@ -1,7 +1,7 @@
 export const enum TaskStatus {
-  toDo = 'TO DO',
-  inProgress = 'IN PROGRESS',
-  done = 'DONE',
+  toDo = 'todo',
+  inProgress = 'in-progress',
+  done = 'done',
 }
 
 export type TaskType = {
