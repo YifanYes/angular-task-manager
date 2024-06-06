@@ -7,7 +7,7 @@
 
     <section class="tasks-container">
       @for (task of tasksList; track $index){
-      <app-task [task]="task" (loadTasks)="loadTasks()"></app-task>
+      <app-task [task]="task" [tasksList]="tasksList"></app-task>
       } @empty {
       <p>Congratulations! 🎉</p>
       <p>You finished your tasks, keep it up</p>

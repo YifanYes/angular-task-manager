@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { TaskStatus, TaskType } from '../../../types/task'
 import { EditTaskDialogComponent } from '../edit-task-dialog/edit-task-dialog.component'
 
@@ -11,8 +11,7 @@ import { EditTaskDialogComponent } from '../edit-task-dialog/edit-task-dialog.co
 })
 export class TaskComponent {
   @Input() task!: TaskType
-  @Output() loadTasks = new EventEmitter()
-
+  @Input() tasksList!: TaskType[]
   constructor() {}
 
   getStatusClass(status: string): string {

@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { TaskService } from '../services/task.service'
+import { TaskService } from '../services/task/task.service'
 
 @Component({
   selector: 'app-create-task-dialog',

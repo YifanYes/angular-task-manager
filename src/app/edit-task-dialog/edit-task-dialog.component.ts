@@ -8,8 +8,9 @@ import {
 } from '@angular/forms'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
-import { TaskType } from '../../../types/task'
-import { TaskService } from '../services/task.service'
+import confetti from 'canvas-confetti'
+import { TaskStatus, TaskType } from '../../../types/task'
+import { TaskService } from '../services/task/task.service'
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -22,6 +23,7 @@ export class EditTaskDialogComponent {
   faPenToSquare = faPenToSquare
   taskForm: FormGroup
   @Input() task!: TaskType
+  @Input() tasksList!: TaskType[]
   @ViewChild('dialog', { static: false })
   dialog!: ElementRef<HTMLDialogElement>
 
@@ -52,8 +54,25 @@ export class EditTaskDialogComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      this.taskService.updateTask(this.taskForm.value).subscribe(() => {})
-      window.location.reload()
+      const updatedTask = {
+        ...this.task,
+        ...this.taskForm.value,
+      }
+
+      this.taskService.updateTask(updatedTask).subscribe(() => {
+        const taskIndex = this.tasksList.findIndex(
+          (t) => t.id === updatedTask.id
+        )
+        if (taskIndex !== -1) {
+          this.tasksList[taskIndex] = updatedTask
+        }
+
+        this.closeDialog()
+
+        if (updatedTask.status === TaskStatus.done) {
+          this.celebrate()
+        }
+      })
     }
   }
 
@@ -61,5 +80,18 @@ export class EditTaskDialogComponent {
     this.taskService.deleteTask(task).subscribe(() => {
       window.location.reload()
     })
+  }
+
+  async celebrate() {
+    const duration = 1000
+
+    confetti({
+      particleCount: 100,
+      spread: 160,
+      origin: { y: 0.6 },
+    })
+
+    // Clear confetti after a certain duration
+    setTimeout(() => confetti.reset(), duration)
   }
 }
