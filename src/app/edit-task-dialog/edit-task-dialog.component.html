@@ -33,19 +33,27 @@
         formControlName="status"
         [value]="task.status"
       >
+        @if(["todo"].includes(task.status)) {
         <option value="todo">TO DO</option>
+        } @if(["todo", "in-progress"].includes(task.status)) {
         <option value="in-progress">IN PROGRESS</option>
+        } @if(["in-progress", "done"].includes(task.status)) {
         <option value="done">DONE</option>
+        }
       </select>
     </div>
 
     <div class="button-group">
       <div>
-        <button class="btn danger" (click)="deleteTask(task)">Delete</button>
+        <button class="btn danger" type="button" (click)="deleteTask(task)">
+          Delete
+        </button>
       </div>
 
       <div class="button-right">
-        <button class="btn secondary" (click)="closeDialog()">Cancel</button>
+        <button class="btn secondary" type="button" (click)="closeDialog()">
+          Cancel
+        </button>
         <button
           class="btn primary ml-10"
           type="submit"

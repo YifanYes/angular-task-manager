@@ -2,8 +2,12 @@
   <div class="main-container">
     <header class="header-container">
       <h1>To Do List</h1>
-      <app-create-task-dialog></app-create-task-dialog>
+      <app-create-task-dialog [tasksList]="tasksList"></app-create-task-dialog>
     </header>
+
+    @for(toast of toastService.toasts; track $index) {
+    <div [class]="getToastClass(toast.type)">{{ toast.message }}</div>
+    }
 
     <section class="tasks-container">
       @for (task of tasksList; track $index){

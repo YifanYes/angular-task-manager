@@ -11,6 +11,7 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import confetti from 'canvas-confetti'
 import { TaskStatus, TaskType } from '../../../types/task'
 import { TaskService } from '../services/task/task.service'
+import { ToastService } from '../services/toast/toast.service'
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -27,7 +28,10 @@ export class EditTaskDialogComponent {
   @ViewChild('dialog', { static: false })
   dialog!: ElementRef<HTMLDialogElement>
 
-  constructor(private taskService: TaskService) {
+  constructor(
+    private taskService: TaskService,
+    public toastService: ToastService
+  ) {
     this.taskForm = new FormGroup({
       id: new FormControl(''),
       title: new FormControl('', [Validators.required]),
@@ -67,6 +71,7 @@ export class EditTaskDialogComponent {
           this.tasksList[taskIndex] = updatedTask
         }
 
+        this.toastService.add('Task updated successfully')
         this.closeDialog()
 
         if (updatedTask.status === TaskStatus.done) {
@@ -78,16 +83,22 @@ export class EditTaskDialogComponent {
 
   deleteTask(task: TaskType): void {
     this.taskService.deleteTask(task).subscribe(() => {
-      window.location.reload()
+      const taskIndex = this.tasksList.findIndex((t) => t.id === task.id)
+      if (taskIndex !== -1) {
+        this.tasksList.splice(taskIndex, 1)
+      }
+
+      this.toastService.add('Task deleted successfully')
+      this.closeDialog()
     })
   }
 
-  async celebrate() {
+  async celebrate(): Promise<void> {
     const duration = 1000
 
     confetti({
       particleCount: 100,
-      spread: 160,
+      spread: 180,
       origin: { y: 0.6 },
     })
 

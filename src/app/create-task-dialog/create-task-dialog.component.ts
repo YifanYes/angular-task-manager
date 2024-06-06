@@ -1,11 +1,13 @@
-import { Component, ElementRef, ViewChild } from '@angular/core'
+import { Component, ElementRef, Input, ViewChild } from '@angular/core'
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
+import { TaskType } from '../../../types/task'
 import { TaskService } from '../services/task/task.service'
+import { ToastService } from '../services/toast/toast.service'
 
 @Component({
   selector: 'app-create-task-dialog',
@@ -16,10 +18,14 @@ import { TaskService } from '../services/task/task.service'
 })
 export class CreateTaskDialogComponent {
   taskForm: FormGroup
+  @Input() tasksList: TaskType[] = []
   @ViewChild('dialog', { static: false })
   dialog!: ElementRef<HTMLDialogElement>
 
-  constructor(private taskService: TaskService) {
+  constructor(
+    private taskService: TaskService,
+    public toastService: ToastService
+  ) {
     this.taskForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
       description: new FormControl(''),
@@ -37,8 +43,11 @@ export class CreateTaskDialogComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      this.taskService.addTask(this.taskForm.value).subscribe(() => {})
-      window.location.reload()
+      this.taskService.addTask(this.taskForm.value).subscribe((task) => {
+        this.toastService.add('Task created successfully')
+        this.closeDialog()
+        this.tasksList.push(task)
+      })
     }
   }
 }
