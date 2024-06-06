@@ -1,0 +1,35 @@
+<dialog #dialog>
+  <h2>Add Task</h2>
+  <form class="task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        formControlName="title"
+        id="title"
+        class="form-control"
+        name="title"
+        type="text"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input
+        formControlName="description"
+        id="description"
+        class="form-control"
+        name="description"
+        type="text"
+      />
+    </div>
+
+    <div class="button-group">
+      <button class="btn secondary" (click)="closeDialog()">Cancel</button>
+      <button class="btn primary" type="submit" [disabled]="taskForm.invalid">
+        Save
+      </button>
+    </div>
+  </form>
+</dialog>
+
+<button class="btn primary" (click)="openDialog()">+ Add task</button>

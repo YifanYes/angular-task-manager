@@ -1,36 +1,9 @@
 <main class="main">
-  <header class="header-container">
-    <h1>To Do List</h1>
-  </header>
-
-  <section class="main-container">
-    <form class="taskform" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input
-          formControlName="title"
-          id="title"
-          class="form-control"
-          name="title"
-          type="text"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input
-          formControlName="description"
-          id="description"
-          class="form-control"
-          name="description"
-          type="text"
-        />
-      </div>
-
-      <button class="btn primary" type="submit" [disabled]="taskForm.invalid">
-        Create
-      </button>
-    </form>
+  <div class="main-container">
+    <header class="header-container">
+      <h1>To Do List</h1>
+      <app-create-task-dialog></app-create-task-dialog>
+    </header>
 
     <section class="tasks-container">
       @for (task of tasksList; track $index){
@@ -40,6 +13,6 @@
       <p>You finished your tasks, keep it up</p>
       }
     </section>
-  </section>
+  </div>
 </main>
 <router-outlet />

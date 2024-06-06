@@ -1,39 +1,30 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { TaskType } from '../../../types/task'
-import { TaskService } from '../services/task.service'
+import { TaskStatus, TaskType } from '../../../types/task'
+import { EditTaskDialogComponent } from '../edit-task-dialog/edit-task-dialog.component'
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [EditTaskDialogComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
 export class TaskComponent {
-  faTrash = faTrash
   @Input() task!: TaskType
-  @Output('loadTasks') loadTasks = new EventEmitter()
+  @Output() loadTasks = new EventEmitter()
 
-  constructor(private taskService: TaskService) {}
+  constructor() {}
 
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
-      case 'todo':
+      case TaskStatus.toDo:
         return 'status-badge todo'
-      case 'in-progress':
+      case TaskStatus.inProgress:
         return 'status-badge in-progress'
-      case 'done':
+      case TaskStatus.done:
         return 'status-badge done'
       default:
         return 'status-badge'
     }
-  }
-
-  deleteTask(task: TaskType) {
-    this.taskService.deleteTask(task).subscribe(() => {
-      this.loadTasks.emit()
-    })
   }
 }

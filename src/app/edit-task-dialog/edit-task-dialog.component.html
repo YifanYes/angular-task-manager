@@ -1,0 +1,60 @@
+<dialog #dialog>
+  <h2>Edit Task</h2>
+  <form class="task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        placeholder="{{ task.title }}"
+        formControlName="title"
+        id="title"
+        class="form-control"
+        name="title"
+        type="text"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input
+        placeholder="{{ task.description }}"
+        formControlName="description"
+        id="description"
+        class="form-control"
+        name="description"
+        type="text"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select class="form-control" id="status">
+        <option value="to-do">TO DO</option>
+        <option value="in-progress">IN PROGRESS</option>
+        <option value="done">DONE</option>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <div>
+        <button class="btn danger" (click)="deleteTask(task)">Delete</button>
+      </div>
+
+      <div class="button-right">
+        <button class="btn secondary" (click)="closeDialog()">Cancel</button>
+        <button
+          class="btn primary ml-10"
+          type="submit"
+          [disabled]="taskForm.invalid"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<fa-icon
+  class="edit-icon"
+  [icon]="faPenToSquare"
+  (click)="openDialog()"
+></fa-icon>

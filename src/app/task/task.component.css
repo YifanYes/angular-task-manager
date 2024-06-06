@@ -35,15 +35,9 @@
   background-color: #32cd32; /* Lime Green */
 }
 
-.task-bottom {
+.task-header {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-}
-
-.trash-icon {
-  width: 3rem;
-  cursor: pointer;
-  color: #ff6961;
 }

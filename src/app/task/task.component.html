@@ -1,13 +1,12 @@
 <div class="task-container">
-  <h3 class="task-title">{{ task.title }}</h3>
+  <div class="task-header">
+    <h3 class="task-title">{{ task.title }}</h3>
+    <app-edit-task-dialog [task]="task" />
+  </div>
+
   <p class="task-description">{{ task.description }}</p>
 
-  <div class="task-bottom">
-    <div [class]="getStatusClass(task.status)">
-      {{ task.status.replace('-', ' ').toUpperCase() }}
-    </div>
-    <div (click)="deleteTask(task)">
-      <fa-icon class="trash-icon" [icon]="faTrash"></fa-icon>
-    </div>
+  <div [class]="getStatusClass(task.status)">
+    {{ task.status.replace('-', ' ').toUpperCase() }}
   </div>
 </div>

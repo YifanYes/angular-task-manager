@@ -8,5 +8,5 @@ export type TaskType = {
   id: string
   title: string
   description?: string | null
-  status: TaskStatus
+  status: string
 }
