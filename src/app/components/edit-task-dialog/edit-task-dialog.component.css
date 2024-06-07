@@ -94,3 +94,8 @@ h2 {
   cursor: pointer;
   font-size: 18px;
 }
+
+.input-error {
+  color: #ff0000;
+  margin-top: 5px;
+}

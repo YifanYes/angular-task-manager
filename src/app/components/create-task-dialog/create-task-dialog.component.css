@@ -78,3 +78,8 @@ h2 {
   border-radius: 5px;
   box-sizing: border-box;
 }
+
+.input-error {
+  color: #ff0000;
+  margin-top: 5px;
+}

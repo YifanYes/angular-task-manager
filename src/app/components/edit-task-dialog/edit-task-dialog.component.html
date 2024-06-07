@@ -10,7 +10,17 @@
         class="form-control"
         name="title"
         type="text"
+        required
       />
+      <div
+        class="input-error"
+        *ngIf="
+          taskForm.get('title')?.hasError('required') &&
+          taskForm.get('title')?.touched
+        "
+      >
+        Title is required
+      </div>
     </div>
 
     <div class="form-group">

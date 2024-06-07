@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common'
 import { Component, ElementRef, Input, ViewChild } from '@angular/core'
 import {
   FormControl,
@@ -16,7 +17,7 @@ import { ToastService } from '../../services/toast/toast.service'
 @Component({
   selector: 'app-edit-task-dialog',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [FormsModule, ReactiveFormsModule, FontAwesomeModule, CommonModule],
   templateUrl: './edit-task-dialog.component.html',
   styleUrl: './edit-task-dialog.component.css',
 })
