@@ -44,11 +44,20 @@ export class CreateTaskDialogComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      this.taskService.addTask(this.taskForm.value).subscribe((task) => {
-        this.toastService.add('Task created successfully')
-        this.closeDialog()
-        this.tasksList.push(task)
-      })
+      this.taskService.addTask(this.taskForm.value).subscribe(
+        (task) => {
+          this.toastService.add('Task created successfully')
+          this.closeDialog()
+          this.tasksList.push(task)
+        },
+        (error) => {
+          console.log(error)
+          this.toastService.add(
+            'An error occurred while creating the task',
+            'error'
+          )
+        }
+      )
     }
   }
 }

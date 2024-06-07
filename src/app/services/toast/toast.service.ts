@@ -9,8 +9,8 @@ export class ToastService {
 
   add(
     message: string,
-    duration: number = 2000,
-    type: 'success' | 'error' = 'success'
+    type: 'success' | 'error' = 'success',
+    duration: number = 2000
   ) {
     this.toasts.push({ message, duration, type })
     setTimeout(() => this.remove(0), duration)

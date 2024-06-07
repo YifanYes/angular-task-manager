@@ -64,34 +64,52 @@ export class EditTaskDialogComponent {
         ...this.taskForm.value,
       }
 
-      this.taskService.updateTask(updatedTask).subscribe(() => {
-        const taskIndex = this.tasksList.findIndex(
-          (t) => t.id === updatedTask.id
-        )
-        if (taskIndex !== -1) {
-          this.tasksList[taskIndex] = updatedTask
-        }
+      this.taskService.updateTask(updatedTask).subscribe(
+        () => {
+          const taskIndex = this.tasksList.findIndex(
+            (t) => t.id === updatedTask.id
+          )
+          if (taskIndex !== -1) {
+            this.tasksList[taskIndex] = updatedTask
+          }
 
-        this.toastService.add('Task updated successfully')
-        this.closeDialog()
+          this.toastService.add('Task updated successfully')
+          this.closeDialog()
 
-        if (updatedTask.status === TaskStatus.done) {
-          this.celebrate()
+          if (updatedTask.status === TaskStatus.done) {
+            this.celebrate()
+          }
+        },
+        (error) => {
+          console.log(error)
+          this.toastService.add(
+            'An error occurred while updating the task',
+            'error'
+          )
         }
-      })
+      )
     }
   }
 
   deleteTask(task: TaskType): void {
-    this.taskService.deleteTask(task).subscribe(() => {
-      const taskIndex = this.tasksList.findIndex((t) => t.id === task.id)
-      if (taskIndex !== -1) {
-        this.tasksList.splice(taskIndex, 1)
-      }
+    this.taskService.deleteTask(task).subscribe(
+      () => {
+        const taskIndex = this.tasksList.findIndex((t) => t.id === task.id)
+        if (taskIndex !== -1) {
+          this.tasksList.splice(taskIndex, 1)
+        }
 
-      this.toastService.add('Task deleted successfully')
-      this.closeDialog()
-    })
+        this.toastService.add('Task deleted successfully')
+        this.closeDialog()
+      },
+      (error) => {
+        console.log(error)
+        this.toastService.add(
+          'An error occurred while deleting the task',
+          'error'
+        )
+      }
+    )
   }
 
   async celebrate(): Promise<void> {
