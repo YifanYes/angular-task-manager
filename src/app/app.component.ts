@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { TaskType } from '../../types/task'
-import { CreateTaskDialogComponent } from './create-task-dialog/create-task-dialog.component'
-import { EditTaskDialogComponent } from './edit-task-dialog/edit-task-dialog.component'
+import { CreateTaskDialogComponent } from './components/create-task-dialog/create-task-dialog.component'
+import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task-dialog.component'
+import { TaskComponent } from './components/task/task.component'
 import { TaskService } from './services/task/task.service'
 import { ToastService } from './services/toast/toast.service'
-import { TaskComponent } from './task/task.component'
 
 @Component({
   selector: 'app-root',

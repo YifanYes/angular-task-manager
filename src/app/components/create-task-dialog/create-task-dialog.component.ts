@@ -5,9 +5,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { TaskType } from '../../../types/task'
-import { TaskService } from '../services/task/task.service'
-import { ToastService } from '../services/toast/toast.service'
+import { TaskType } from '../../../../types/task'
+import { TaskService } from '../../services/task/task.service'
+import { ToastService } from '../../services/toast/toast.service'
 
 @Component({
   selector: 'app-create-task-dialog',

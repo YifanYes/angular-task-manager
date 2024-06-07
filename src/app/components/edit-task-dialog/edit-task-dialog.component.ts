@@ -9,9 +9,9 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import confetti from 'canvas-confetti'
-import { TaskStatus, TaskType } from '../../../types/task'
-import { TaskService } from '../services/task/task.service'
-import { ToastService } from '../services/toast/toast.service'
+import { TaskStatus, TaskType } from '../../../../types/task'
+import { TaskService } from '../../services/task/task.service'
+import { ToastService } from '../../services/toast/toast.service'
 
 @Component({
   selector: 'app-edit-task-dialog',
