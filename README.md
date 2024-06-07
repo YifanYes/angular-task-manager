@@ -2,6 +2,8 @@
 
 This is a task manager web application using Angular and Express.js
 
+https://github.com/YifanYes/angular-task-manager/assets/30553455/02a5bf93-bce9-4bdb-ae16-8f5ec9162ec5
+
 # Features
 
 - CRUD services for task management.
